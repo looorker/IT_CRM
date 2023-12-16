@@ -1,0 +1,10 @@
+{% extends 'cli/base.html' %}
+{% load static %}
+{% block title %} Добавление ивента {% endblock %}
+{% block content %}
+    <form action="{% url 'event_add' %}" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-success">Добавить</button>
+    </form>
+{% endblock %}

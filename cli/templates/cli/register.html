@@ -1,0 +1,10 @@
+{% extends 'cli/base.html' %}
+{% load static %}
+{% block title %} Регистрация пользователя {% endblock %}
+{% block content %}
+    <form action="{% url 'register' %}" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-success">Регистрация</button>
+    </form>
+{% endblock %}

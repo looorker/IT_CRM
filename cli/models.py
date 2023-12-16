@@ -1,3 +1,5 @@
+from django.utils import timezone
+
 from django.db import models
 
 
@@ -10,3 +12,16 @@ class User(models.Model):
 
     def __str__(self):
         return f'{self.name} {self.sername}'
+
+class Meetup(models.Model):
+    user = models.ManyToManyField(User)
+    name = models.CharField('Название', max_length=100, blank=False)
+    area = models.CharField('Сфера', max_length=100, blank=False)
+    description = models.TextField('Описание', max_length=500, blank=True)
+    start_date = models.DateField('Дата начала', blank=False, default=timezone.now())
+
+
+    def get_users(self) -> int:
+        return self.user.count()
+    def __str__(self):
+        return f'{self.name}'

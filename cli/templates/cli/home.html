@@ -1,0 +1,43 @@
+{% extends 'cli/base.html' %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'cli/css/home.css'%}" type="text/css">
+
+{% block title %}CLI home page{% endblock %}
+
+{% block content %}
+    <div class="table">
+        <br/><center><h2>Отслеживание мероприятий</h2></center>
+        <br/>
+        <br/>
+<!--        <div class="search_form">-->
+<!--        <form class="form-inline my-2 my-lg-0" id="searchbar">-->
+<!--            <input class="form-control mr-sm-2" type="search" placeholder="Search">-->
+<!--            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>-->
+<!--        </form>-->
+<!--        </div>-->
+        <br/>
+        <br/>
+        <table class="table">
+          <thead class="thead-dark">
+            <tr>
+                <th scope="col">Название</th>
+                <th scope="col">Область</th>
+                <th scope="col">Описание</th>
+                <th scope="col">Участники</th>
+                <th scope="col">Дата начала</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for i in ivent %}
+            <tr>
+              <th scope="row">{{i.name}}</th>
+                <td>{{i.area}}</td>
+                <td>{{i.description}}</td>
+                <td>{{i.get_users}}</td>
+                <td>{{i.start_date}}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+    </div>
+{% endblock %}
