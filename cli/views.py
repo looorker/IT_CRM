@@ -21,7 +21,12 @@ def analisus(request):
 
 
 def send(request):
-    return render(request, 'cli/send.html')
+    form = SendMailForm()
+    context = {
+        'form': form,
+    }
+
+    return render(request, 'cli/send.html', context)
 
 
 def manage(request):

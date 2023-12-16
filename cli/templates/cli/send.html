@@ -1,6 +1,11 @@
 {% extends 'cli/base.html' %}
 {% load static %}
-
+{% block title %}Рассылка сообщений{% endblock %}
 {% block content %}
 <h1>Страница рассылки</h1>
+    <form action="{% url 'send' %}" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-success">Разослать</button>
+    </form>
  {% endblock %}
