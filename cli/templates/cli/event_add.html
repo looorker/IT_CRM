@@ -7,7 +7,7 @@
         margin-left: 50%;
     }
 </style>
-    <form action="{% url 'event_add' %}" method="post">
+    <form  method="post">
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit" class="btn btn-success">Добавить</button>

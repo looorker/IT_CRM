@@ -1,0 +1,11 @@
+{% extends 'cli/base.html' %}
+{% load static %}
+{% block title %} Удаление ивента {% endblock %}
+{% block content %}
+    <h1>Вы уверены, что хотите удалить ивент - {{ mt.name }}</h1>
+    <form method="post">
+    {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Удалить</button>
+    </form>
+    <a href="/cli/" class="btn btn-dark">Нет</a>
+{% endblock %}

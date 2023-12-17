@@ -1,24 +1,43 @@
 import os
 
 import pandas
+from django.contrib import messages
 from django.shortcuts import render, redirect
+from django.urls import reverse_lazy
 from . import mail_utils
 from cli.forms import *
 from cli.models import *
-import pandas as pd
-from django.views.generic import DetailView, UpdateView, DeleteView
+from django.views.generic import DetailView, UpdateView, DeleteView, CreateView
 
 
 #############################################
+
+
+class MeetupAdd(CreateView):
+    model = Meetup
+    form_class = EventCreateForm
+    template_name = 'cli/event_add.html'
+    success_url = reverse_lazy('home')
+
+
 class MeetupUpdateView(UpdateView):
     model = Meetup
+    fields = ['name', 'area', 'description', 'start_date']
     template_name = 'cli/event_add.html'
-    form_class = EventCreateForm
+    success_url = reverse_lazy('home')
+
+    def get_form_kwargs(self):
+        """Return the keyword arguments for instantiating the form."""
+        kwargs = super().get_form_kwargs()
+        if hasattr(self, 'object'):
+            kwargs.update({'instance': self.object})
+        return kwargs
 
 class MeetupDeliteView(DeleteView):
     model = Meetup
-    template_name = 'cli/event_add.html'
-
+    template_name = 'cli/event_del.html'
+    success_url = reverse_lazy('home')
+    context_object_name = 'mt'
 
 class MeetupView(DetailView):
     model = Meetup
@@ -95,22 +114,22 @@ def register(request):
     return render(request, 'cli/register.html', context=context)
 
 
-def event_add(request):
-    form = EventCreateForm()
-    context = {
-        'form': form,
-    }
-
-    if (request.method == 'POST'):
-        form = EventCreateForm(request.POST)
-        if form.is_valid():
-            try:
-                form.save()
-                return redirect('manage')
-            except:
-                form.add_error(None, 'Ошибка создания ивента.')
-
-    return render(request, 'cli/event_add.html', context=context)
+# def event_add(request):
+#     form = EventCreateForm()
+#     context = {
+#         'form': form,
+#     }
+#
+#     if (request.method == 'POST'):
+#         form = EventCreateForm(request.POST)
+#         if form.is_valid():
+#             try:
+#                 form.save()
+#                 return redirect('manage')
+#             except:
+#                 form.add_error(None, 'Ошибка создания ивента.')
+#
+#     return render(request, 'cli/event_add.html', context=context)
 
 
 def handle_uploaded_file(f):

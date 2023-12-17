@@ -13,5 +13,7 @@
     <h2>Описание: {{ mt_card.description }}</h2>
     <h2>Дата начала: {{ mt_card.start_date }}</h2>
     <a href="{% url 'mt_edit' mt_card.id %}" class="btn btn-warning">Редактировать</a>
+    <a href="{% url 'mt_del' mt_card.id %}" class="btn btn-danger">Удалить</a>
 </div>
+
 {% endblock %}
