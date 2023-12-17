@@ -1,0 +1,22 @@
+{% extends 'cli/base.html' %}
+{% load static %}
+{% block title %} Карточка пользователя {% endblock %}
+{% block content %}
+<br/>
+<br/>
+<br/>
+<div class="card">
+    <div class="name">
+        <h3>{{ usr.name }} {{usr.sername}}</h3>
+    </div>
+    <div class="description">
+        <h4>{{usr.description}}</h4>
+    </div>
+    <div class="email">
+        <h4>{{usr.email}}</h4>
+    </div>
+    <a href="{% url 'user_edit' usr.id %}" class="btn btn-warning">Редактировать</a>
+    <a href="{% url 'user_del' usr.id %}" class="btn btn-danger">Удалить</a>
+</div>
+
+{% endblock %}

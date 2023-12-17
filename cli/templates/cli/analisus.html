@@ -1,5 +1,4 @@
 {% extends 'cli/base.html' %}
-{% load static %}
 {% block title %}Аналитика ивентов{% endblock %}
 {% block content %}
 <style>
@@ -27,7 +26,24 @@
     }
 }
 </style>
-<link rel="stylesheet" href="{% static '../../static/cli/css/home.css' %}" type="text/css">
+
  <h1>Страница аналитики</h1>
 <script src="http://mihailmaximov.ru/projects/snow/snowfall2020.js"></script>
+
+
+
+
+<div class="jumbotron">
+    <h1 class="display-4">Оценка проведенных митапов</h1>
+    <p class="lead">Рассчёт отношения прошедших ивентов к текущим</p>
+    <hr class="my-4">
+    <p>Пройдено {{ passed_e }} мероприятий, а на текущий момент в нашем сообществе {{ running_e }} актуальных ивента(ов).</p>
+    <p>Поздравляю!!! На текущий момент в нашем сообществе {{ passed_p}}% успешно проведенных мероприятий! Вы большой молодец.</p>
+    <p>Всего в сообществе состоит {{ total_users }} участников, их средний возраст = {{ middle_age }} Земных единиц.</p>
+    <p>Самый популярный ивент:</p>
+    <li>Mojayka HACK с рекордным количеством участников - 2 человека</li>
+    <p class="lead">
+  </p>
+</div>
+
 {% endblock %}

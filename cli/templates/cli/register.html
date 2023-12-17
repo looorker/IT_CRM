@@ -2,7 +2,7 @@
 {% load static %}
 {% block title %} Регистрация пользователя {% endblock %}
 {% block content %}
-    <form action="{% url 'register' %}" method="post">
+    <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
 
@@ -10,7 +10,7 @@
     </form>
     <br/>
     <br/>
-    <form action="{% url 'register' %}" method="post" enctype="multipart/form-data">
+    <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="form-group">
             <input type="file" name="xls_data">Импорт пользователей из таблицы excel.

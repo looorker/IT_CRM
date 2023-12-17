@@ -1,16 +1,54 @@
 import os
-
 import pandas
-from django.contrib import messages
+from django.conf import settings
+from django.db.models import Q, Max
+from django.http import StreamingHttpResponse, Http404, HttpResponse
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from . import mail_utils
 from cli.forms import *
 from cli.models import *
-from django.views.generic import DetailView, UpdateView, DeleteView, CreateView
+from django.views.generic import DetailView, UpdateView, DeleteView, CreateView, ListView
 
 
 #############################################
+class UserListView(ListView):
+    model = User
+    template_name = 'cli/users.html'
+    context_object_name = 'users'
+
+
+class UserView(DetailView):
+    model = User
+    template_name = 'cli/user_card.html'
+    context_object_name = 'usr'
+
+
+class UserUpdateView(UpdateView):
+    model = User
+    fields = ['name', 'sername', 'age', 'description', 'master', 'area', 'city', 'email']
+    template_name = 'cli/register.html'
+    success_url = reverse_lazy('users')
+
+
+class UserDeliteView(DeleteView):
+    model = User
+    template_name = 'cli/event_del.html'
+    success_url = reverse_lazy('users')
+    context_object_name = 'mt'
+
+
+class UserSearchView(ListView):
+    model = User
+    template_name = 'cli/users.html'
+    context_object_name = 'users'
+
+    def get_queryset(self):  # новый
+        query = self.request.GET.get('q')
+        object_list = User.objects.filter(
+            Q(name__icontains=query) | Q(sername__icontains=query)
+        )
+        return object_list
 
 
 class MeetupAdd(CreateView):
@@ -33,11 +71,13 @@ class MeetupUpdateView(UpdateView):
             kwargs.update({'instance': self.object})
         return kwargs
 
+
 class MeetupDeliteView(DeleteView):
     model = Meetup
     template_name = 'cli/event_del.html'
     success_url = reverse_lazy('home')
     context_object_name = 'mt'
+
 
 class MeetupView(DetailView):
     model = Meetup
@@ -56,7 +96,39 @@ def home(request):
 
 
 def analisus(request):
-    return render(request, 'cli/analisus.html')
+    passed_events = Meetup.objects.filter(start_date__lte=timezone.now())
+    running_events = Meetup.objects.filter(start_date__gte=timezone.now())
+    users = User.objects.all()
+    middle_age = 0
+    users_c = 0
+    for u in users:
+        middle_age += u.age
+        users_c += 1
+    middle_age = middle_age/users_c
+    n_passed_events = 0
+    n_running_events = 0
+    n_events = 0
+    e_names = []
+    passed_names = []
+    running_names = []
+    for e in passed_events:
+        passed_names.append(e.name)
+        n_passed_events += 1
+    for e in running_events:
+        running_names.append(e.name)
+        n_running_events += 1
+    passed_p = n_passed_events / (n_passed_events + n_running_events) * 100
+
+
+
+    context = {
+        'passed_e': n_passed_events,
+        'running_e': n_running_events,
+        'passed_p': round(passed_p, 1),
+        'middle_age': round(middle_age, 0),
+    }
+
+    return render(request, 'cli/analisus.html', context)
 
 
 def send(request):
@@ -147,3 +219,16 @@ def parse_data():
     for i in df_m:
         User.objects.create(name=i[0], sername=i[1], age=i[2], description=i[3] if i[3] != 'nan' else '', master=i[4],
                             area=i[5], city=i[6], email=i[7])
+
+
+def download(request, path='test.xlsx'):
+    print(0)
+    file_path = os.path.join(settings.MEDIA_ROOT, path)
+    print(file_path)
+    if os.path.exists(file_path):
+        print(1)
+        with open(file_path, 'rb') as fh:
+            response = HttpResponse(fh.read(), content_type="application/vnd.ms-excel")
+            response['Content-Disposition'] = 'inline; filename=' + os.path.basename(file_path)
+            return response
+    raise Http404

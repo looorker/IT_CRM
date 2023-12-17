@@ -1,0 +1,25 @@
+{% extends 'cli/base.html' %}
+{% load static %}
+{% block title %} Управление пользователями {% endblock %}
+{% block content %}
+<br/>
+<br/>
+<br/>
+<form action="{% url 'users_q' %}" method="get">
+  <input name="q" type="text" placeholder="Search...">
+</form>
+{% for usr in users %}
+<br/>
+<br/>
+<br/>
+<br/>
+    <div class="card" style="width: 50rem;">
+        <img style= "border-radius: 20px;"src="https://www.needpix.com/file_download.php?url=https://storage.needpix.com/rsynced_images/instagram-3814081_1280.png" class="card-img-top" alt="USER">
+        <div class="card-body">
+            <h5 class="card-title">{{ usr.name }} {{ usr.sername }}</h5>
+            <p class="card-text">{{ usr.description }}</p>
+            <a href="{% url 'user_card' usr.id %}" class="btn btn-info">Инфо</a>
+        </div>
+    </div>
+{% endfor %}
+{% endblock %}
