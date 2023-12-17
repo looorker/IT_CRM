@@ -2,6 +2,11 @@
 {% load static %}
 {% block title %} Добавление ивента {% endblock %}
 {% block content %}
+<style>
+    form{
+        margin-left: 50%;
+    }
+</style>
     <form action="{% url 'event_add' %}" method="post">
         {% csrf_token %}
         {{ form.as_p }}

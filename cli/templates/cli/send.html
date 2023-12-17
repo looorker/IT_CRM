@@ -2,10 +2,62 @@
 {% load static %}
 {% block title %}Рассылка сообщений{% endblock %}
 {% block content %}
+<style>
+ h1{
+    display: block;
+    color: #f68bf9;
+    font-size: 60px;
+    font-weight: 900;
+    margin-top: 1%;
+    padding-bottom: 1%;
+    margin-left: 35%;
+    animation: text_color 2000ms ease infinite;
+}
+
+@keyframes text_color {
+    0%{
+        color: #cdedff;
+    }
+    50%{
+        color:  #7a60fa;
+    }
+    100%{
+        color: #cdedff;
+    }
+}
+</style>
 <h1>Страница рассылки</h1>
+<style>
+    form{
+        background-color: white;
+        width: 31%;
+        border-radius: 15px;
+        padding: 3% 1% 2% 1%;
+        font-size: 20px;
+        font-weight: 900;
+        margin-left: 35%;
+    }
+    label{
+        display: block;
+    }
+    span{
+        margin-left: 20px;
+    }
+    textarea{
+        border-radius: 10px;
+    }
+    input{
+        border-radius: 10px;
+    }
+    button{
+        margin: 0 auto;
+    }
+
+</style>
     <form action="{% url 'send' %}" method="post">
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit" class="btn btn-success">Разослать</button>
     </form>
+<script src="http://mihailmaximov.ru/projects/snow/snowfall2020.js"></script>
  {% endblock %}

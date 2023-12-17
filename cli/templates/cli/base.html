@@ -9,8 +9,19 @@
 
     <title>{% block title %}{% endblock %}</title>
 </head>
+<style>
+    body{
+    background: rgb(0,36,1);
+    background: linear-gradient(90deg, rgba(0,36,1,1) 0%, rgba(91,127,255,1) 0%, rgba(182,198,255,1) 45%, rgba(228,238,255,1) 98%, rgba(240,248,255,1) 100%);
+</style>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<style>
+    nav{
+        background-color: white;
+    }
+
+</style>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" style = "border-bottom: 1px solid black">
       <a class="navbar-brand" href="">IT CLI</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>

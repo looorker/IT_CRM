@@ -1,10 +1,35 @@
 {% extends 'cli/base.html' %}
 {% load static %}
-<link rel="stylesheet" href="{% static 'cli/css/home.css'%}" type="text/css">
+<link rel="stylesheet" href="{% static '../../static/cli/css/home.css' %}" type="text/css">
 
 {% block title %}CLI home page{% endblock %}
 
 {% block content %}
+<style>
+ h2{
+    display: block;
+    margin-left: 50%;
+    transform: translateX(-50%);
+    color: #f68bf9;
+    font-size: 60px;
+    font-weight: 900;
+    margin-top: 1%;
+    padding-bottom: 1%;
+    animation: text_color 2000ms ease infinite;
+}
+
+@keyframes text_color {
+    0%{
+        color: #80c0f6;
+    }
+    50%{
+        color:  #7a60fa;
+    }
+    100%{
+        color: #80c0f6;
+    }
+}
+</style>
     <div class="table">
         <br/><center><h2>Отслеживание мероприятий</h2></center>
         <br/>
@@ -19,6 +44,38 @@
         <br/>
         <table class="table">
           <thead class="thead-dark">
+          <style>
+              thead{
+                  background-color: white;
+              }
+              tr{
+                  background: rgb(0,36,1);
+                  background: linear-gradient(90deg, rgba(0,36,1,1) 0%, rgba(9,59,207,1) 0%, rgba(246,133,249,1) 0%, rgba(252,252,252,1) 0%, rgba(172,180,255,1) 100%, rgba(255,255,255,1) 100%);
+                  color: black;
+                  font-weight: 700;
+                  border-radius: 10px;
+              }
+              th{
+                  color: black;
+                  text-align: center;
+                  margin-top: 1%;
+                  border-right: 2px solid black;
+                  border-bottom: 2px solid black;
+              }
+              td{
+                  margin-top: 1%;
+                  border-right: 2px solid black;
+                  border-bottom: 2px solid black;
+                  font-size: 15px;
+              }
+
+              .table .thead-dark th {
+                color: black;
+                border: 5px solid royalblue;
+                background-color: white;
+                border-color: #454d55;
+            }
+          </style>
             <tr>
                 <th scope="col">Название</th>
                 <th scope="col">Область</th>
@@ -32,14 +89,36 @@
             {% for i in ivent %}
             <tr>
               <th scope="row">{{i.name}}</th>
-                <td>{{i.area}}</td>
+                <td style="text-align: center">{{i.area}}</td>
                 <td>{{i.description}}</td>
-                <td>{{i.get_users}}</td>
-                <td>{{i.start_date}}</td>
-                <td><button type="submit" class="btn btn-danger">Удалить</button></td>
+                <td style="text-align: center">{{i.get_users}}</td>
+                <td style="text-align: center">{{i.start_date}}</td>
+                <style>
+                    button{
+                        font-size: 20px;
+                        font-weight: 500;
+                        border-radius: 5px;
+                        width: 100%;
+                        transition: all 0.6s;
+                        animation: bg_color 2000ms ease infinite;
+                    }
+                    @keyframes bg_color {
+                        0%{
+                            background: #ffe372;
+                        }
+                        50%{
+                            background-color:  #ff1d1d;
+                        }
+                        100%{
+                            background: #ffe372;
+                        }
+                    }
+                </style>
+                <td><a href="{% url 'mt_card' i.id %}" class="btn btn-info">Инфо</a></td>
             </tr>
             {% endfor %}
           </tbody>
         </table>
     </div>
+<script src="http://mihailmaximov.ru/projects/snow/snowfall2020.js"></script>
 {% endblock %}

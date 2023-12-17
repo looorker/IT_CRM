@@ -2,5 +2,32 @@
 {% load static %}
 {% block title %}Аналитика ивентов{% endblock %}
 {% block content %}
+<style>
+ h1{
+    display: block;
+    margin-left: 63%;
+    transform: translateX(-50%);
+    color: #f68bf9;
+    font-size: 30px;
+    font-weight: 900;
+    margin-top: 1%;
+    padding-bottom: 5%;
+    animation: text_color 2000ms ease infinite;
+}
+
+@keyframes text_color {
+    0%{
+        color: #80c0f6;
+    }
+    50%{
+        color:  #7a60fa;
+    }
+    100%{
+        color: #80c0f6;
+    }
+}
+</style>
+<link rel="stylesheet" href="{% static '../../static/cli/css/home.css' %}" type="text/css">
  <h1>Страница аналитики</h1>
+<script src="http://mihailmaximov.ru/projects/snow/snowfall2020.js"></script>
 {% endblock %}

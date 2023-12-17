@@ -5,6 +5,17 @@
     <form action="{% url 'register' %}" method="post">
         {% csrf_token %}
         {{ form.as_p }}
+
         <button type="submit" class="btn btn-success">Регистрация</button>
     </form>
+    <br/>
+    <br/>
+    <form action="{% url 'register' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="form-group">
+            <input type="file" name="xls_data">Импорт пользователей из таблицы excel.
+            <button type="submit" class="btn btn-success">Импортировать</button>
+        </div>
+    </form>
+
 {% endblock %}

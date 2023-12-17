@@ -4,20 +4,29 @@
 {% block content %}
 
     <br/>
-    <div class="card" style="width: 18rem;">
-        <img src="https://d3f1iyfxxz8i1e.cloudfront.net/courses/course_image/26feade2b3c3.jpeg" class="card-img-top" alt="USER">
+<style>
+    .card{
+        margin-left: 50%;
+        transform: translateX(-50%);
+        margin-top: 2%;
+        border-radius: 20px;
+    }
+</style>
+    <div class="card" style="width: 50rem;">
+        <img style= "border-radius: 20px;"src="https://d3f1iyfxxz8i1e.cloudfront.net/courses/course_image/26feade2b3c3.jpeg" class="card-img-top" alt="USER">
         <div class="card-body">
             <h5 class="card-title">Добавление пользователя</h5>
             <p class="card-text">Форма для добаввления пользователя в базу данных.</p>
             <a href="{% url 'register' %}" class="btn btn-primary">Добавить</a>
         </div>
     </div>
-    <div class="card" style="width: 18rem;">
-        <img src="https://www.anti-malware.ru/files/images/source/snimok_ekrana_2020-08-04_v_13.04.51.png" class="card-img-top" alt="EVENT">
+    <div class="card" style="width: 50rem;">
+        <img style= "border-radius: 20px;" src="https://www.anti-malware.ru/files/images/source/snimok_ekrana_2020-08-04_v_13.04.51.png" class="card-img-top" alt="EVENT">
         <div class="card-body">
             <h5 class="card-title">Добавить мероприятие</h5>
             <p class="card-text">Форма для добаввления мероприятия в базу данных.</p>
             <a href="{% url 'event_add' %}" class="btn btn-primary">Добавить</a>
         </div>
     </div>
+<script src="http://mihailmaximov.ru/projects/snow/snowfall2020.js"></script>
 {% endblock %}

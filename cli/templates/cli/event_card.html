@@ -1,0 +1,17 @@
+{% extends 'cli/base.html' %}
+{% load static %}
+{% block title %} {{ mt_card.name }} {% endblock %}
+{% block content %}
+<style>
+    form{
+        margin-left: 50%;
+    }
+</style>
+<div class="feautures">
+    <h1>{{ mt_card.name }}</h1>
+    <h2>Тип мероприятия: {{ mt_card.area}}</h2>
+    <h2>Описание: {{ mt_card.description }}</h2>
+    <h2>Дата начала: {{ mt_card.start_date }}</h2>
+    <a href="{% url 'mt_edit' mt_card.id %}" class="btn btn-warning">Редактировать</a>
+</div>
+{% endblock %}
